@@ -12,3 +12,29 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.math-function {
+  color: Purple;
+  font-weight: bold;
+}
+
+.math-number {
+  color: Blue;
+}
+
+.math-boolean {
+  color: Green;
+}
+
+.math-string {
+  color: Grey;
+}
+
+/* .math-string::before,
+.math-string::after {
+  content: '"';
+} */
+
+.math-property {
+  font-style: italic;
+}

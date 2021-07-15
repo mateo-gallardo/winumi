@@ -30,6 +30,7 @@ module.exports = {
     ],
     'no-use-before-define': 'off',
     '@typescript-eslint/no-use-before-define': ['error'],
+    'react/no-array-index-key': 'off',
   },
   settings: {
     'import/resolver': {

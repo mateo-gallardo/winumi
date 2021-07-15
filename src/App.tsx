@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
-import Line from './components/Line';
+import Lines from './components/Lines';
 
 function App() {
   return (
     <div className="App">
-      <Line />
+      <Lines />
     </div>
   );
 }
