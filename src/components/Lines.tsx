@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { writeText } from '@tauri-apps/api/clipboard';
-import { emit } from '@tauri-apps/api/event';
 import styled from 'styled-components';
 import Editor from 'react-simple-code-editor';
 import { create, all, MathJsStatic } from 'mathjs';
-import Events from '../constants/Events';
 import Footer from './Footer/Footer';
+import FooterMessage from '../FooterMessage';
+import TotalResult from '../TotalResult';
 
 const math = create(all, { number: 'BigNumber' }) as MathJsStatic;
 
@@ -47,27 +47,13 @@ const Error = styled.span`
   font-size: 20px;
 `;
 
-const setTotal = (total: string) => {
-  emit(Events.TotalChanged, total);
-};
-
-const calculateTotal = (results: string[]) => {
-  try {
-    const sum = results.join(' + ');
-    const total = math.evaluate(sum);
-    setTotal(total.toString());
-  } catch (error) {
-    setTotal('');
-  }
-};
-
 const Lines = () => {
   const [results, setResults] = useState(['']);
   const [code, setCode] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
-    calculateTotal(results);
+    TotalResult.calculateTotal(results);
   }, [results]);
 
   const evaluateResult = (expression: string) => {
@@ -99,21 +85,21 @@ const Lines = () => {
       }
     } catch (error) {
       setErrorMessage(error.message);
-      setTotal('');
+      TotalResult.setTotal('');
     }
   };
 
   const copyToClipboard = async (result: string) => {
     await writeText(result);
-    emit(Events.ShowFooterMessageAndFadeOut, 'Result copied');
+    FooterMessage.showMessageAndFadeOut('Result copied');
   };
 
   const showClickToCopyMessage = () => {
-    emit(Events.ShowFooterMessage, 'Click to copy');
+    FooterMessage.showMessage('Click to copy');
   };
 
   const hideClickToCopyMessage = () => {
-    emit(Events.FadeOutFooterMessage);
+    FooterMessage.fadeOut();
   };
 
   return (

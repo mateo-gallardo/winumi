@@ -1,5 +1,5 @@
 const TimeDelaysMS = {
-  MessageDisplayTime: 3000,
+  MessageDisplayTime: 2000,
   MessageFade: 200,
 };
 
