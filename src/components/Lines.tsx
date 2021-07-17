@@ -52,11 +52,9 @@ const Lines = () => {
   const [code, setCode] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
-  useEffect(() => {
-    TotalResult.calculateTotal(results);
-  }, [results]);
-
   const evaluateResult = (expression: string) => {
+    const resultsForTotalCalculation: string[] = [];
+
     try {
       let newResults = math.evaluate(expression);
 
@@ -69,6 +67,7 @@ const Lines = () => {
 
         newResults = newResults.map((result: any) => {
           let formattedResult = result.toString();
+          resultsForTotalCalculation.push(formattedResult);
 
           if (!Number.isNaN(Number(formattedResult))) {
             formattedResult = Number(formattedResult).toLocaleString();
@@ -77,9 +76,11 @@ const Lines = () => {
           return formattedResult;
         });
 
+        TotalResult.calculateTotal(resultsForTotalCalculation);
         setResults(newResults);
         setErrorMessage('');
       } else {
+        TotalResult.calculateTotal(resultsForTotalCalculation);
         setResults(['']);
         setErrorMessage('');
       }

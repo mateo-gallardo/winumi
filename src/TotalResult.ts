@@ -19,7 +19,12 @@ export default class TotalResult {
     try {
       const sum = results.join(' + ');
       const total = math.evaluate(sum);
-      TotalResult.setTotal(total.toString());
+
+      if (!Number.isNaN(Number(total))) {
+        TotalResult.setTotal(Number(total).toLocaleString());
+      } else {
+        TotalResult.setTotal(total.toString());
+      }
     } catch (error) {
       TotalResult.setTotal('');
     }
