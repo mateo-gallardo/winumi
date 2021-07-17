@@ -1,6 +1,8 @@
 const Events = {
   TotalChanged: 'TotalChanged',
-  CopiedToClipboard: 'CopiedToClipboard',
+  ShowFooterMessageAndFadeOut: 'ShowFooterMessageAndFadeOut',
+  ShowFooterMessage: 'ShowFooterMessage',
+  FadeOutFooterMessage: 'FadeOutFooterMessage',
 };
 
 export default Events;

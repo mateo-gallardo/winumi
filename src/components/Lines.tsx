@@ -105,7 +105,15 @@ const Lines = () => {
 
   const copyToClipboard = async (result: string) => {
     await writeText(result);
-    emit(Events.CopiedToClipboard);
+    emit(Events.ShowFooterMessageAndFadeOut, 'Result copied');
+  };
+
+  const showClickToCopyMessage = () => {
+    emit(Events.ShowFooterMessage, 'Click to copy');
+  };
+
+  const hideClickToCopyMessage = () => {
+    emit(Events.FadeOutFooterMessage);
   };
 
   return (
@@ -133,6 +141,8 @@ const Lines = () => {
             <Result
               key={`${result}-${index}`}
               onClick={() => copyToClipboard(result)}
+              onMouseEnter={showClickToCopyMessage}
+              onMouseLeave={hideClickToCopyMessage}
             >
               {result}
             </Result>
