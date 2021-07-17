@@ -11,6 +11,7 @@ const math = create(all, { number: 'BigNumber' }) as MathJsStatic;
 
 const Container = styled.div`
   display: flex;
+  flex: 1;
   flex-direction: row;
   justify-content: space-between;
 `;
@@ -136,8 +137,8 @@ const Lines = () => {
           ))}
         </ResultsContainer>
       </Container>
-      <Error>{errorMessage}</Error>
       <Footer />
+      {!!errorMessage && <Error>{errorMessage}</Error>}
     </>
   );
 };

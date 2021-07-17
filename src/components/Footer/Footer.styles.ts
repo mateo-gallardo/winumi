@@ -6,6 +6,7 @@ export const Container = styled.div`
   justify-content: space-between;
   color: #4d5361;
   font-weight: 500;
+  min-height: 30px;
 `;
 
 export const SettingsIcon = styled.div``;
@@ -29,6 +30,7 @@ interface MessageProps {
 export const Message = styled.div`
   position: absolute;
   top: 0;
+  width: 100%;
   background-color: #282c34;
   opacity: ${(props: MessageProps) => (props.fade ? 0 : 'initial')};
   transition-duration: 200ms;
