@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { writeText } from '@tauri-apps/api/clipboard';
 import styled from 'styled-components';
 import Editor from 'react-simple-code-editor';
 import { create, all, MathJsStatic } from 'mathjs';
+// @ts-ignore
+import ResizablePanels from 'resizable-panels-react';
 import Footer from './Footer/Footer';
 import FooterMessage from '../FooterMessage';
 import TotalResult from '../TotalResult';
@@ -19,14 +21,20 @@ const Container = styled.div`
 const EditorContainer = styled.div`
   display: flex;
   flex: 1;
+  height: 100%;
 `;
 
 const ResultsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  height: 100%;
   padding: 10px;
   border-left: 1px solid #4d5361;
 `;
 
 const Result = styled.div`
+  width: fit-content;
   color: #7eb24f;
   font-size: 25px;
   font-family: 'Fira code', 'Fira Mono', monospace;
@@ -107,35 +115,46 @@ const Lines = () => {
   return (
     <>
       <Container>
-        <EditorContainer>
-          <Editor
-            value={code}
-            onValueChange={(newCode) => {
-              setCode(newCode);
-              evaluateResult(newCode);
-            }}
-            highlight={(newCode) => newCode}
-            padding={10}
-            style={{
-              color: 'white',
-              fontFamily: '"Fira code", "Fira Mono", monospace',
-              fontSize: 25,
-              flex: 1,
-            }}
-          />
-        </EditorContainer>
-        <ResultsContainer>
-          {results.map((result: string, index: number) => (
-            <Result
-              key={`${result}-${index}`}
-              onClick={() => copyToClipboard(result)}
-              onMouseEnter={showClickToCopyMessage}
-              onMouseLeave={hideClickToCopyMessage}
-            >
-              {result}
-            </Result>
-          ))}
-        </ResultsContainer>
+        <ResizablePanels
+          displayDirection="row"
+          width="100%"
+          height="100%"
+          panelsSize={[80, 20]}
+          sizeUnitMeasure="%"
+          resizerColor="#282c34"
+          resizerSize="10px"
+          minPanelSize={15}
+        >
+          <EditorContainer>
+            <Editor
+              value={code}
+              onValueChange={(newCode) => {
+                setCode(newCode);
+                evaluateResult(newCode);
+              }}
+              highlight={(newCode) => newCode}
+              padding={10}
+              style={{
+                color: 'white',
+                fontFamily: '"Fira code", "Fira Mono", monospace',
+                fontSize: 25,
+                flex: 1,
+              }}
+            />
+          </EditorContainer>
+          <ResultsContainer>
+            {results.map((result: string, index: number) => (
+              <Result
+                key={`${result}-${index}`}
+                onClick={() => copyToClipboard(result)}
+                onMouseEnter={showClickToCopyMessage}
+                onMouseLeave={hideClickToCopyMessage}
+              >
+                {result}
+              </Result>
+            ))}
+          </ResultsContainer>
+        </ResizablePanels>
       </Container>
       <Footer />
       {!!errorMessage && <Error>{errorMessage}</Error>}
