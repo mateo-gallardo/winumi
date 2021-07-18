@@ -1,7 +1,7 @@
 import React from 'react';
 import { create, all, MathJsStatic } from 'mathjs';
 import { Event, emit, listen, UnlistenFn } from '@tauri-apps/api/event';
-import Events from './constants/Events';
+import Events from '../constants/Events';
 
 const math = create(all, { number: 'BigNumber' }) as MathJsStatic;
 

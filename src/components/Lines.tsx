@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { writeText } from '@tauri-apps/api/clipboard';
 import styled from 'styled-components';
 import Editor from 'react-simple-code-editor';
@@ -6,8 +6,9 @@ import { create, all, MathJsStatic } from 'mathjs';
 // @ts-ignore
 import ResizablePanels from 'resizable-panels-react';
 import Footer from './Footer/Footer';
-import FooterMessage from '../FooterMessage';
-import TotalResult from '../TotalResult';
+import FooterMessage from '../utils/FooterMessage';
+import TotalResult from '../utils/TotalResult';
+import DataManager from '../utils/DataManager';
 
 const math = create(all, { number: 'BigNumber' }) as MathJsStatic;
 
@@ -35,6 +36,7 @@ const ResultsContainer = styled.div`
 
 const Result = styled.div`
   width: fit-content;
+  white-space: nowrap;
   color: #7eb24f;
   font-size: 25px;
   font-family: 'Fira code', 'Fira Mono', monospace;
@@ -56,9 +58,13 @@ const Error = styled.span`
   font-size: 20px;
 `;
 
-const Lines = () => {
+interface LinesProps {
+  initialLines: string;
+}
+
+const Lines = ({ initialLines }: LinesProps) => {
   const [results, setResults] = useState(['']);
-  const [code, setCode] = useState('');
+  const [lines, setLines] = useState(initialLines);
   const [errorMessage, setErrorMessage] = useState('');
 
   const evaluateResult = (expression: string) => {
@@ -112,6 +118,10 @@ const Lines = () => {
     FooterMessage.fadeOut();
   };
 
+  useEffect(() => {
+    evaluateResult(lines);
+  }, []);
+
   return (
     <>
       <Container>
@@ -127,10 +137,11 @@ const Lines = () => {
         >
           <EditorContainer>
             <Editor
-              value={code}
+              value={lines}
               onValueChange={(newCode) => {
-                setCode(newCode);
+                setLines(newCode);
                 evaluateResult(newCode);
+                DataManager.saveLines(newCode);
               }}
               highlight={(newCode) => newCode}
               padding={10}
@@ -157,7 +168,9 @@ const Lines = () => {
         </ResizablePanels>
       </Container>
       <Footer />
-      {!!errorMessage && <Error>{errorMessage}</Error>}
+      {process.env.NODE_ENV === 'development' && !!errorMessage && (
+        <Error>{errorMessage}</Error>
+      )}
     </>
   );
 };

@@ -8,8 +8,8 @@ import {
   Message,
   RightIcon,
 } from './Footer.styles';
-import FooterMessage from '../../FooterMessage';
-import TotalResult from '../../TotalResult';
+import FooterMessage from '../../utils/FooterMessage';
+import TotalResult from '../../utils/TotalResult';
 
 const Footer = () => {
   const [total, setTotal] = useState('');

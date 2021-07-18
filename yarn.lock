@@ -1775,14 +1775,14 @@
     defer-to-connect "^2.0.0"
 
 "@tauri-apps/api@^1.0.0-beta.4":
-  version "1.0.0-beta.4"
-  resolved "https://registry.yarnpkg.com/@tauri-apps/api/-/api-1.0.0-beta.4.tgz#f78e443b7d34c6ca637c95586686d23e4ab3122c"
-  integrity sha512-PWO3ULlMVW8p70wFWjkHVCfkI/ewRX/CwSDX016nn4xSOrMwFICswPsqOcYBdQDPClagIm/4FuRuqkn8dEj0qg==
+  version "1.0.0-beta.5"
+  resolved "https://registry.yarnpkg.com/@tauri-apps/api/-/api-1.0.0-beta.5.tgz#32727b3b478f67330a79409ceaf16a4a51410fce"
+  integrity sha512-gecjskr6nCLyjky2rtth64Jsk1qyHeWykYO5wroEkoTwESJJEzFnpnqyZHCWgkRLJC1TIYEv+lddldKvH/O1RA==
 
 "@tauri-apps/cli@^1.0.0-beta.5":
-  version "1.0.0-beta.5"
-  resolved "https://registry.yarnpkg.com/@tauri-apps/cli/-/cli-1.0.0-beta.5.tgz#b71007a9fa18617ffe1671f339bb3b6cbf8549c2"
-  integrity sha512-1FdeLKhqA0wNAUnkfgJRZ0pf9qxcjBs4xFCSvTLY+uB5LQjoeQ0R0olwaNdise5OHm4Aoj8MEMP+tGTQA/QZtw==
+  version "1.0.0-beta.6"
+  resolved "https://registry.yarnpkg.com/@tauri-apps/cli/-/cli-1.0.0-beta.6.tgz#29e461036ea36a935cd91c0e290957c922ff9aa4"
+  integrity sha512-zcF7+diZk3LHcS1/Rwo2f/6hRMY9fOVQYSgqSkjZDGGkTXhysrEiCCc4DwLmB1QES9P0lhRt4CPBJLpH0MdsWA==
   dependencies:
     "@tauri-apps/toml" "2.2.4"
     chalk "4.1.1"
@@ -2009,6 +2009,18 @@
   integrity sha512-/FvAK2p4jQOaJ6CGDHJTqZcUtbZe820qIeTg7o0Shg7drB4JHeL+V/dhSaly7NXx6u8eSee+r7coT+yuJEvDLg==
   dependencies:
     "@types/node" "*"
+
+"@types/lodash.debounce@^4.0.6":
+  version "4.0.6"
+  resolved "https://registry.yarnpkg.com/@types/lodash.debounce/-/lodash.debounce-4.0.6.tgz#c5a2326cd3efc46566c47e4c0aa248dc0ee57d60"
+  integrity sha512-4WTmnnhCfDvvuLMaF3KV4Qfki93KebocUF45msxhYyjMttZDQYzHkO639ohhk8+oco2cluAFL3t5+Jn4mleylQ==
+  dependencies:
+    "@types/lodash" "*"
+
+"@types/lodash@*":
+  version "4.14.171"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.171.tgz#f01b3a5fe3499e34b622c362a46a609fdb23573b"
+  integrity sha512-7eQ2xYLLI/LsicL2nejW9Wyko3lcpN6O/z0ZLHrEQsg280zIdCv1t/0m6UtBjUHokCGBQ3gYTbHzDkZ1xOBwwg==
 
 "@types/minimatch@*":
   version "3.0.3"
@@ -8767,6 +8779,11 @@ lodash.clonedeep@^4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.clonedeep/-/lodash.clonedeep-4.5.0.tgz#e23f3f9c4f8fbdde872529c1071857a086e5ccef"
   integrity sha1-4j8/nE+Pvd6HJSnBBxhXoIblzO8=
+
+lodash.debounce@^4.0.8:
+  version "4.0.8"
+  resolved "https://registry.yarnpkg.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
+  integrity sha1-gteb/zCmfEAF/9XiUVMArZyk168=
 
 lodash.memoize@^4.1.2:
   version "4.1.2"

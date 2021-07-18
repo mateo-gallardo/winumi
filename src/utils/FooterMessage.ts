@@ -1,7 +1,7 @@
 import React from 'react';
 import { Event, emit, listen, UnlistenFn } from '@tauri-apps/api/event';
-import Events from './constants/Events';
-import TimeDelaysMS from './constants/TimeDelaysMS';
+import Events from '../constants/Events';
+import TimeDelaysMS from '../constants/TimeDelaysMS';
 
 type SetStringAction = React.Dispatch<React.SetStateAction<string>>;
 type SetBooleanAction = React.Dispatch<React.SetStateAction<boolean>>;
