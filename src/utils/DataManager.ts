@@ -7,11 +7,14 @@ import {
 import { appDir } from '@tauri-apps/api/path';
 import debounce from 'lodash.debounce';
 import TimeDelaysMS from '../constants/TimeDelaysMS';
+import ZoomLevels from '../constants/ZoomLevels';
+import { SettingsData } from './SettingsManager';
 
 const FILE_NAME = 'saved-data.json';
 
 export interface SavedData {
   lines: string;
+  settings: SettingsData;
 }
 
 export default class DataManager {
@@ -34,6 +37,10 @@ export default class DataManager {
       console.error(error);
       DataManager.savedData = {
         lines: '',
+        settings: {
+          zoomLevel: ZoomLevels[2],
+          displayErrors: false,
+        },
       };
     }
   }
@@ -45,6 +52,15 @@ export default class DataManager {
 
   private static async undebouncedSaveLines(lines: string) {
     DataManager.savedData.lines = lines;
+    DataManager.save();
+  }
+
+  static async saveSettings(settings: SettingsData) {
+    DataManager.savedData.settings = settings;
+    DataManager.save();
+  }
+
+  private static async save() {
     const saveDirPath = await appDir();
     await DataManager.createSaveDirectory(saveDirPath);
     const filePath = await DataManager.getFilePath();

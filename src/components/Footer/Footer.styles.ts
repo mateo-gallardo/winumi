@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import SettingsIconSVG from './SettingsIconSVG';
 
 export const Container = styled.div`
   display: flex;
@@ -6,10 +7,21 @@ export const Container = styled.div`
   justify-content: space-between;
   color: #4d5361;
   font-weight: 500;
-  min-height: 30px;
+  min-height: 1.2em;
+  padding: 0.5em 0;
+  align-items: center;
 `;
 
-export const SettingsIcon = styled.div``;
+export const SettingsIconContainer = styled.div`
+  display: flex;
+  width: 10%;
+`;
+
+export const SettingsIcon = styled(SettingsIconSVG)`
+  cursor: pointer;
+  margin: 0 0.5em;
+  color: #4d5361;
+`;
 
 export const CenterTextContainer = styled.div`
   position: relative;
@@ -21,6 +33,7 @@ export const CenterTextContainer = styled.div`
 export const Total = styled.div`
   cursor: pointer;
   user-select: none;
+  font-size: 0.85em;
 `;
 
 interface MessageProps {
@@ -35,6 +48,9 @@ export const Message = styled.div`
   opacity: ${(props: MessageProps) => (props.fade ? 0 : 'initial')};
   transition-duration: 200ms;
   user-select: none;
+  font-size: 0.85em;
 `;
 
-export const RightIcon = styled.div``;
+export const RightIcon = styled.div`
+  width: 10%;
+`;

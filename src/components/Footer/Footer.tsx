@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { writeText } from '@tauri-apps/api/clipboard';
 import {
   Container,
+  SettingsIconContainer,
   SettingsIcon,
   CenterTextContainer,
   Total,
@@ -10,8 +11,10 @@ import {
 } from './Footer.styles';
 import FooterMessage from '../../utils/FooterMessage';
 import TotalResult from '../../utils/TotalResult';
+import Settings from '../Settings/Settings';
 
 const Footer = () => {
+  const [showSettings, setShowSettings] = useState(false);
   const [total, setTotal] = useState('');
   const [message, setMessage] = useState('');
   const [shouldFadeMessage, setShouldFadeMessage] = useState(true);
@@ -39,18 +42,23 @@ const Footer = () => {
   };
 
   return (
-    <Container>
-      <SettingsIcon />
-      <CenterTextContainer>
-        <Message fade={shouldFadeMessage} hidden={shouldHideMessage}>
-          {message}
-        </Message>
-        {!!total && (
-          <Total onClick={() => copyTotalToClipboard()}>Total: {total}</Total>
-        )}
-      </CenterTextContainer>
-      <RightIcon />
-    </Container>
+    <>
+      <Container>
+        <SettingsIconContainer>
+          <SettingsIcon height={'1em'} onClick={() => setShowSettings(true)} />
+        </SettingsIconContainer>
+        <CenterTextContainer>
+          <Message fade={shouldFadeMessage} hidden={shouldHideMessage}>
+            {message}
+          </Message>
+          {!!total && (
+            <Total onClick={() => copyTotalToClipboard()}>Total: {total}</Total>
+          )}
+        </CenterTextContainer>
+        <RightIcon />
+      </Container>
+      {showSettings && <Settings onClose={() => setShowSettings(false)} />}
+    </>
   );
 };
 

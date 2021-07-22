@@ -32,6 +32,14 @@ module.exports = {
     '@typescript-eslint/no-use-before-define': ['error'],
     'react/no-array-index-key': 'off',
     'lines-between-class-members': 'off',
+    'react/jsx-props-no-spreading': 'off',
+    'no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars': ['error'],
+    'react/jsx-curly-brace-presence': [
+      'error',
+      { props: 'always', children: 'never' },
+    ],
+    'no-plusplus': 'off',
   },
   settings: {
     'import/resolver': {

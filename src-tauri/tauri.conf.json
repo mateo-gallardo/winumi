@@ -55,8 +55,8 @@
     "windows": [
       {
         "title": "winumi",
-        "width": 800,
-        "height": 600,
+        "width": 500,
+        "height": 300,
         "resizable": true,
         "fullscreen": false
       }
