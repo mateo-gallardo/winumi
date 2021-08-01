@@ -9,6 +9,7 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 0.9em;
 `;
 
 export const Overlay = styled.div`
@@ -23,19 +24,19 @@ export const Modal = styled.div`
   z-index: 1;
   min-width: 50%;
   min-height: 50%;
-  background-color: #282c34;
+  background-color: ${(props) => props.theme.colors.primary};
   -webkit-box-shadow: 0px 0px 16px 6px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 0px 16px 6px rgba(0, 0, 0, 0.2);
   user-select: none;
   border-radius: 7px;
   display: flex;
   flex-direction: column;
-  color: #4d5361;
+  color: ${(props) => props.theme.colors.text};
 `;
 
 export const Title = styled.div`
   text-align: center;
-  font-size: 0.8em;
+  font-size: 0.9em;
   font-weight: 500;
   padding: 0.3em 0 0.7em 0;
 `;
@@ -46,16 +47,16 @@ export const CloseButtonContainer = styled.div`
 `;
 
 export const CloseButton = styled.div`
-  background-color: #4d5361;
+  background-color: ${(props) => props.theme.colors.primaryLight};
   margin: 1em;
   border-radius: 7px;
   cursor: pointer;
-  font-size: 0.8em;
+  font-size: 0.9em;
   padding: 0 0.3em;
-  color: black;
+  color: ${(props) => props.theme.colors.primary};
 
   :hover {
-    background-color: #5e6676;
+    background-color: ${(props) => props.theme.colors.text};
   }
 `;
 
@@ -69,6 +70,7 @@ export const OptionContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
   font-weight: 500;
+  padding: 0.2em 0;
 `;
 
 export const FontSizeInputContainer = styled.div`
@@ -77,24 +79,29 @@ export const FontSizeInputContainer = styled.div`
 `;
 
 export const FontSizeContainer = styled.div`
-  border-top: 1px solid #1f1f1f;
-  border-bottom: 1px solid #1f1f1f;
+  border-top: 1px solid ${(props) => props.theme.colors.primaryLight};
+  border-bottom: 1px solid ${(props) => props.theme.colors.primaryLight};
   padding: 0 0.2em;
   height: 1.5em;
 `;
 
-export const Button = styled.div`
+interface ButtonProps {
+  selected?: boolean;
+}
+
+export const Button = styled.div<ButtonProps>`
   cursor: pointer;
-  height: 1.5em;
-  width: 1.5em;
+  min-height: 1.5em;
+  min-width: 1.5em;
   font-weight: bold;
-  background-color: #2d3038;
-  background: linear-gradient(180deg, #2d3038 0%, #323740 35%, #25272d 100%);
-  border: 1px solid #1f1f1f;
+  background-color: ${(props) =>
+    props.selected
+      ? props.theme.colors.primaryLight
+      : props.theme.colors.primary};
+  border: 1px solid ${(props) => props.theme.colors.primaryLight};
 
   :hover {
-    background-color: #3f434e;
-    background: linear-gradient(180deg, #3f434e 0%, #434a56 35%, #383b44 100%);
+    background-color: ${(props) => props.theme.colors.primaryLight};
   }
 `;
 
@@ -106,6 +113,14 @@ export const RightButton = styled(Button)`
 export const LeftButton = styled(Button)`
   border-top-left-radius: 0.4em;
   border-bottom-left-radius: 0.4em;
+`;
+
+export const ThemeRightButton = styled(RightButton)`
+  padding: 0 1em;
+`;
+
+export const ThemeLeftButton = styled(LeftButton)`
+  padding: 0 1em;
 `;
 
 export const CheckboxContainer = styled.div`

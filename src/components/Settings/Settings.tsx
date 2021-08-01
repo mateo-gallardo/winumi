@@ -1,4 +1,5 @@
 import React from 'react';
+import { ThemeNames } from '../../constants/Themes';
 import SettingsManager from '../../utils/SettingsManager';
 import { useSharedState } from '../../utils/SharedState';
 import Checkbox from '../Checkbox/Checkbox';
@@ -17,6 +18,8 @@ import {
   RightButton,
   CheckboxContainer,
   DisplayErrorsText,
+  ThemeRightButton,
+  ThemeLeftButton,
 } from './Settings.styles';
 
 interface SettingsProps {
@@ -50,6 +53,23 @@ const Settings = ({ onClose }: SettingsProps) => {
               <Checkbox checked={settings.displayErrors} />
               <DisplayErrorsText>Display errors</DisplayErrorsText>
             </CheckboxContainer>
+          </OptionContainer>
+          <OptionContainer>
+            Theme
+            <FontSizeInputContainer>
+              <ThemeLeftButton
+                onClick={() => SettingsManager.pickTheme(ThemeNames.Dark)}
+                selected={settings.themeName === ThemeNames.Dark}
+              >
+                {ThemeNames.Dark}
+              </ThemeLeftButton>
+              <ThemeRightButton
+                onClick={() => SettingsManager.pickTheme(ThemeNames.Light)}
+                selected={settings.themeName === ThemeNames.Light}
+              >
+                {ThemeNames.Light}
+              </ThemeRightButton>
+            </FontSizeInputContainer>
           </OptionContainer>
         </Options>
         <CloseButtonContainer>

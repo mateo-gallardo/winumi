@@ -1,3 +1,4 @@
+import { ThemeNames } from '../constants/Themes';
 import ZoomLevels, { ZoomLevel } from '../constants/ZoomLevels';
 import DataManager from './DataManager';
 import { SharedState, createSharedState } from './SharedState';
@@ -7,12 +8,14 @@ const OneHundredPercentZoomLevelIndex = 2;
 export interface SettingsData {
   zoomLevel: ZoomLevel;
   displayErrors: boolean;
+  themeName: ThemeNames;
 }
 
 export default class SettingsManager {
   static state: SharedState<SettingsData> = createSharedState({
     zoomLevel: ZoomLevels[OneHundredPercentZoomLevelIndex],
     displayErrors: false,
+    themeName: ThemeNames.Dark,
   } as SettingsData);
 
   static async init() {
@@ -56,6 +59,14 @@ export default class SettingsManager {
     SettingsManager.state.setValue({
       ...currentState,
       displayErrors: !currentState.displayErrors,
+    });
+  }
+
+  static pickTheme(themeName: ThemeNames) {
+    const currentState = SettingsManager.state.getValue();
+    SettingsManager.state.setValue({
+      ...currentState,
+      themeName,
     });
   }
 }

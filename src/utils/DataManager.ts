@@ -6,6 +6,7 @@ import {
 } from '@tauri-apps/api/fs';
 import { appDir } from '@tauri-apps/api/path';
 import debounce from 'lodash.debounce';
+import { ThemeNames } from '../constants/Themes';
 import TimeDelaysMS from '../constants/TimeDelaysMS';
 import ZoomLevels from '../constants/ZoomLevels';
 import { SettingsData } from './SettingsManager';
@@ -40,6 +41,7 @@ export default class DataManager {
         settings: {
           zoomLevel: ZoomLevels[2],
           displayErrors: false,
+          themeName: ThemeNames.Dark,
         },
       };
     }

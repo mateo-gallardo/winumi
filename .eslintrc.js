@@ -30,6 +30,8 @@ module.exports = {
     ],
     'no-use-before-define': 'off',
     '@typescript-eslint/no-use-before-define': ['error'],
+    'no-shadow': 'off',
+    '@typescript-eslint/no-shadow': ['error'],
     'react/no-array-index-key': 'off',
     'lines-between-class-members': 'off',
     'react/jsx-props-no-spreading': 'off',
@@ -40,6 +42,7 @@ module.exports = {
       { props: 'always', children: 'never' },
     ],
     'no-plusplus': 'off',
+    'import/prefer-default-export': 'off',
   },
   settings: {
     'import/resolver': {
