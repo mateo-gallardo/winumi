@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { writeText } from '@tauri-apps/api/clipboard';
 import { ThemeContext } from 'styled-components';
 import Editor from 'react-simple-code-editor';
+import { highlight, languages } from 'prismjs';
 import { create, all, MathJsStatic } from 'mathjs';
 // @ts-ignore
 import ResizablePanels from 'resizable-panels-react';
@@ -18,6 +19,8 @@ import FooterMessage from '../../utils/FooterMessage';
 import TotalResult from '../../utils/TotalResult';
 import DataManager from '../../utils/DataManager';
 import SettingsManager from '../../utils/SettingsManager';
+
+require('prismjs/components/prism-rego');
 
 const math = create(all, { number: 'BigNumber' }) as MathJsStatic;
 
@@ -108,7 +111,7 @@ const Lines = ({ initialLines }: LinesProps) => {
                 evaluateResult(newCode);
                 DataManager.saveLines(newCode);
               }}
-              highlight={(newCode) => newCode}
+              highlight={(code) => highlight(code, languages.rego, 'rego')}
               padding={'0.4em'}
               style={{
                 color: theme.colors.editor.primary,

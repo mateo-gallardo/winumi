@@ -11,6 +11,10 @@ declare module 'styled-components' {
       error: string;
       editor: {
         primary: string;
+        comment: string;
+        variable: string;
+        operator: string;
+        function: string;
         separator: string;
       };
     };

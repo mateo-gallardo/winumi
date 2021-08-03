@@ -21,6 +21,10 @@ const themes: Themes = {
       error: '#942e2e',
       editor: {
         primary: 'white',
+        comment: '#6c976d',
+        variable: '#b3c4d3',
+        operator: '#e1e1e1',
+        function: '#84b4d2',
         separator: '#4d4e53',
       },
     },
@@ -35,6 +39,10 @@ const themes: Themes = {
       error: '#942e2e',
       editor: {
         primary: '#282c34',
+        comment: '#6c976d',
+        variable: '#346da0',
+        operator: '#383838',
+        function: '#009dff',
         separator: '#cccccc',
       },
     },
