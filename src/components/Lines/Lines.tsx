@@ -11,6 +11,7 @@ import {
   EditorContainer,
   ResultsContainer,
   Result,
+  EmptyResult,
   Error,
 } from './Lines.styles';
 import { useSharedState } from '../../utils/SharedState';
@@ -39,7 +40,23 @@ const Lines = ({ initialLines }: LinesProps) => {
     const resultsForTotalCalculation: string[] = [];
 
     try {
-      let newResults = math.evaluate(expression);
+      const expressionLines = expression.split('\n');
+      const correctLines: string[] = [];
+
+      expressionLines.forEach((line) => {
+        const compoundedExpression = `${correctLines.join('\n')}
+        ${line}`;
+
+        try {
+          math.evaluate(compoundedExpression);
+          correctLines.push(line);
+        } catch (error) {
+          correctLines.push('');
+        }
+      });
+
+      let newResults = math.evaluate(correctLines.join('\n'));
+      const formattedResults: string[] = [];
 
       if (newResults !== undefined && typeof newResults !== 'function') {
         if (!newResults.entries) {
@@ -48,19 +65,25 @@ const Lines = ({ initialLines }: LinesProps) => {
           newResults = newResults.entries;
         }
 
-        newResults = newResults.map((result: any) => {
-          let formattedResult = result.toString();
-          resultsForTotalCalculation.push(formattedResult);
+        let resultsIndex = 0;
+        correctLines.forEach((line) => {
+          if (line.trim()) {
+            const result = newResults[resultsIndex++];
+            let formattedResult = result.toString();
+            resultsForTotalCalculation.push(formattedResult);
 
-          if (!Number.isNaN(Number(formattedResult))) {
-            formattedResult = Number(formattedResult).toLocaleString();
+            if (!Number.isNaN(Number(formattedResult))) {
+              formattedResult = Number(formattedResult).toLocaleString();
+            }
+
+            formattedResults.push(formattedResult);
+          } else {
+            formattedResults.push('');
           }
-
-          return formattedResult;
         });
 
         TotalResult.calculateTotal(resultsForTotalCalculation);
-        setResults(newResults);
+        setResults(formattedResults);
         setErrorMessage('');
       } else {
         TotalResult.calculateTotal(resultsForTotalCalculation);
@@ -122,16 +145,20 @@ const Lines = ({ initialLines }: LinesProps) => {
             />
           </EditorContainer>
           <ResultsContainer>
-            {results.map((result: string, index: number) => (
-              <Result
-                key={`${result}-${index}`}
-                onClick={() => copyToClipboard(result)}
-                onMouseEnter={showClickToCopyMessage}
-                onMouseLeave={hideClickToCopyMessage}
-              >
-                {result}
-              </Result>
-            ))}
+            {results.map((result: string, index: number) =>
+              result ? (
+                <Result
+                  key={`${result}-${index}`}
+                  onClick={() => copyToClipboard(result)}
+                  onMouseEnter={showClickToCopyMessage}
+                  onMouseLeave={hideClickToCopyMessage}
+                >
+                  {result}
+                </Result>
+              ) : (
+                <EmptyResult>none</EmptyResult>
+              )
+            )}
           </ResultsContainer>
         </ResizablePanels>
       </Container>

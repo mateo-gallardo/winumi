@@ -43,6 +43,12 @@ export const Result = styled.div`
   }
 `;
 
+export const EmptyResult = styled.div`
+  user-select: none;
+  font-family: 'Fira code', 'Fira Mono', monospace;
+  color: ${(props) => props.theme.colors.primary};
+`;
+
 export const Error = styled.span`
   padding-bottom: 0.5em;
   color: ${(props) => props.theme.colors.error};
