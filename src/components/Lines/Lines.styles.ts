@@ -30,7 +30,7 @@ export const Result = styled.div`
   white-space: nowrap;
   color: ${(props) => props.theme.colors.result};
   font-size: 1em;
-  font-family: 'Fira code', 'Fira Mono', monospace;
+  font-family: 'RobotoMono';
   user-select: none;
   cursor: pointer;
   padding: 0 0.2em;

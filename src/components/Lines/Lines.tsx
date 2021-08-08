@@ -138,7 +138,7 @@ const Lines = ({ initialLines }: LinesProps) => {
               padding={'0.4em'}
               style={{
                 color: theme.colors.editor.primary,
-                fontFamily: '"Fira code", "Fira Mono", monospace',
+                fontFamily: '"RobotoMono"',
                 fontSize: '1em',
                 flex: 1,
               }}
@@ -156,7 +156,7 @@ const Lines = ({ initialLines }: LinesProps) => {
                   {result}
                 </Result>
               ) : (
-                <EmptyResult>none</EmptyResult>
+                <EmptyResult key={`${result}-${index}`}>none</EmptyResult>
               )
             )}
           </ResultsContainer>
