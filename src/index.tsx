@@ -1,8 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { appWindow } from '@tauri-apps/api/window';
 import './index.css';
 import AppWithSettings from './AppWithSettings';
 import reportWebVitals from './reportWebVitals';
+import Platform from './utils/Platform';
+
+(async () => {
+  if (Platform.isWindows()) {
+    try {
+      appWindow.setDecorations(false);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+})();
 
 ReactDOM.render(
   <React.StrictMode>

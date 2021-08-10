@@ -5,6 +5,7 @@ export const Container = styled.div`
   flex: 1;
   flex-direction: row;
   justify-content: space-between;
+  padding: 0 20px;
 `;
 
 export const EditorContainer = styled.div`
