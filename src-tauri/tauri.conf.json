@@ -48,7 +48,25 @@
       "active": false
     },
     "allowlist": {
-      "all": true
+      "fs": {
+        "readFile": true,
+        "writeFile": true,
+        "readDir": true,
+        "createDir": true,
+        "scope": ["$APP/", "$APP/*"]
+      },
+      "path": {
+        "all": true
+      },
+      "window": {
+        "setDecorations": true,
+        "maximize": true,
+        "unmaximize": true,
+        "minimize": true,
+        "unminimize": true,
+        "startDragging": true,
+        "close": true
+      }
     },
     "windows": [
       {
