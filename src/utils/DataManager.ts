@@ -36,14 +36,17 @@ export default class DataManager {
       DataManager.savedData = JSON.parse(value);
     } catch (error) {
       console.error(error);
-      DataManager.savedData = {
-        lines: '',
-        settings: {
-          zoomLevel: ZoomLevels[2],
-          displayErrors: false,
-          themeName: ThemeNames.Dark,
-        },
-      };
+    } finally {
+      if (!DataManager.savedData) {
+        DataManager.savedData = {
+          lines: '',
+          settings: {
+            zoomLevel: ZoomLevels[2],
+            displayErrors: false,
+            themeName: ThemeNames.Dark,
+          },
+        };
+      }
     }
   }
 
