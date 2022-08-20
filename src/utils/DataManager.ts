@@ -44,6 +44,7 @@ export default class DataManager {
             zoomLevel: ZoomLevels[2],
             displayErrors: false,
             themeName: ThemeNames.Dark,
+            panelsSizes: [80, 20],
           },
         };
       }

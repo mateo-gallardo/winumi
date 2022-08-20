@@ -120,11 +120,12 @@ const Lines = ({ initialLines }: LinesProps) => {
           displayDirection={'row'}
           width={'100%'}
           height={'100%'}
-          panelsSize={[80, 20]}
+          panelsSize={settings.panelsSizes}
           sizeUnitMeasure={'%'}
           resizerColor={theme.colors.primary}
           resizerSize={'10px'}
           minPanelSize={15}
+          onResizeEnd={SettingsManager.saveDividerPosition}
         >
           <EditorContainer>
             <Editor

@@ -9,6 +9,7 @@ export interface SettingsData {
   zoomLevel: ZoomLevel;
   displayErrors: boolean;
   themeName: ThemeNames;
+  panelsSizes: number[];
 }
 
 export default class SettingsManager {
@@ -16,6 +17,7 @@ export default class SettingsManager {
     zoomLevel: ZoomLevels[OneHundredPercentZoomLevelIndex],
     displayErrors: false,
     themeName: ThemeNames.Dark,
+    panelsSizes: [80, 20],
   } as SettingsData);
 
   static async init() {
@@ -67,6 +69,14 @@ export default class SettingsManager {
     SettingsManager.state.setValue({
       ...currentState,
       themeName,
+    });
+  }
+
+  static saveDividerPosition(panelsSizes: number[]) {
+    const currentState = SettingsManager.state.getValue();
+    SettingsManager.state.setValue({
+      ...currentState,
+      panelsSizes,
     });
   }
 }
