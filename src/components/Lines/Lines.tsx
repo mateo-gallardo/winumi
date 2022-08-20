@@ -90,7 +90,7 @@ const Lines = ({ initialLines }: LinesProps) => {
         setResults(['']);
         setErrorMessage('');
       }
-    } catch (error) {
+    } catch (error: any) {
       setErrorMessage(error.message);
       TotalResult.setTotal('');
     }

@@ -9,7 +9,7 @@ import SettingsManager from './utils/SettingsManager';
 import Themes from './constants/Themes';
 import Platform from './utils/Platform';
 
-function App() {
+const App = () => {
   const settings = useSharedState(SettingsManager.state);
   const [savedData, setSavedData] = useState<SavedData | undefined>();
   const isWindows = Platform.isWindows();
@@ -20,8 +20,10 @@ function App() {
   };
 
   useEffect(() => {
-    getSavedData();
-  }, []);
+    if (!savedData) {
+      getSavedData();
+    }
+  }, [savedData]);
 
   if (savedData === undefined) {
     return null;
@@ -35,6 +37,6 @@ function App() {
       </Container>
     </ThemeProvider>
   );
-}
+};
 
 export default App;

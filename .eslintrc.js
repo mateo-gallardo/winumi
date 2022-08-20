@@ -43,6 +43,13 @@ module.exports = {
     ],
     'no-plusplus': 'off',
     'import/prefer-default-export': 'off',
+    'react/function-component-definition': [
+      1,
+      {
+        namedComponents: 'arrow-function',
+        unnamedComponents: 'arrow-function',
+      },
+    ],
   },
   settings: {
     'import/resolver': {

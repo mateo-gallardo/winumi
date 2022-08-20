@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import SettingsManager from './utils/SettingsManager';
+import React, { useState, useRef, useEffect } from 'react';
 import App from './App';
+import SettingsManager from './utils/SettingsManager';
 
 const AppWithSettings = () => {
+  const initialized = useRef(false);
   const [loading, setLoading] = useState(true);
 
   const init = async () => {
@@ -11,7 +12,10 @@ const AppWithSettings = () => {
   };
 
   useEffect(() => {
-    init();
+    if (!initialized.current) {
+      initialized.current = true;
+      init();
+    }
   }, []);
 
   if (loading) {
