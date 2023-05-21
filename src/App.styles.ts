@@ -11,6 +11,7 @@ export const Container = styled.div<ContainerProps>`
   top: 0;
   left: 0;
   right: 0;
+  overflow: auto;
 
   display: flex;
   flex-direction: column;

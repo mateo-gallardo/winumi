@@ -13,6 +13,7 @@ import {
   Result,
   EmptyResult,
   Error,
+  LineErrorsContainer,
 } from './Lines.styles';
 import { useSharedState } from '../../utils/SharedState';
 import Footer from '../Footer/Footer';
@@ -20,6 +21,7 @@ import FooterMessage from '../../utils/FooterMessage';
 import TotalResult from '../../utils/TotalResult';
 import DataManager from '../../utils/DataManager';
 import SettingsManager from '../../utils/SettingsManager';
+import LineError from '../LineError/LineError';
 
 require('prismjs/components/prism-rego');
 
@@ -35,6 +37,7 @@ const Lines = ({ initialLines }: LinesProps) => {
   const [results, setResults] = useState(['']);
   const [lines, setLines] = useState(initialLines);
   const [errorMessage, setErrorMessage] = useState('');
+  const [lineErrors, setLineErrors] = useState<string[]>([]);
 
   const evaluateResult = (expression: string) => {
     const resultsForTotalCalculation: string[] = [];
@@ -42,6 +45,7 @@ const Lines = ({ initialLines }: LinesProps) => {
     try {
       const expressionLines = expression.split('\n');
       const correctLines: string[] = [];
+      const newLinesWithErrors: string[] = [];
 
       expressionLines.forEach((line) => {
         const compoundedExpression = `${correctLines.join('\n')}
@@ -50,7 +54,9 @@ const Lines = ({ initialLines }: LinesProps) => {
         try {
           math.evaluate(compoundedExpression);
           correctLines.push(line);
-        } catch (error) {
+          newLinesWithErrors.push('');
+        } catch (error: any) {
+          newLinesWithErrors.push(error.message);
           correctLines.push('');
         }
       });
@@ -90,6 +96,8 @@ const Lines = ({ initialLines }: LinesProps) => {
         setResults(['']);
         setErrorMessage('');
       }
+
+      setLineErrors(newLinesWithErrors);
     } catch (error: any) {
       setErrorMessage(error.message);
       TotalResult.setTotal('');
@@ -116,6 +124,17 @@ const Lines = ({ initialLines }: LinesProps) => {
   return (
     <>
       <Container>
+        {settings.displayErrors && (
+          <LineErrorsContainer>
+            {lineErrors.map((lineError: string, index: number) =>
+              lineError ? (
+                <LineError key={`${lineError}-${index}`} message={lineError} />
+              ) : (
+                <EmptyResult key={`${lineError}-${index}`}>none</EmptyResult>
+              )
+            )}
+          </LineErrorsContainer>
+        )}
         <ResizablePanels
           displayDirection={'row'}
           width={'100%'}

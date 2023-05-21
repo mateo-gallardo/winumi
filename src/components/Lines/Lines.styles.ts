@@ -55,3 +55,27 @@ export const Error = styled.span`
   color: ${(props) => props.theme.colors.error};
   font-size: 0.8em;
 `;
+
+export const LineErrorsContainer = styled(ResultsContainer)`
+  width: 1rem;
+  padding-left: 0;
+  padding-right: 0;
+
+  :hover {
+    border: none;
+  }
+`;
+
+export const LineErrorContainer = styled(Result)`
+  cursor: default;
+
+  :hover {
+    color: unset;
+    background-color: unset;
+  }
+
+  svg {
+    width: 1rem;
+    height: 1rem;
+  }
+`;
