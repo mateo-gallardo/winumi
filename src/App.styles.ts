@@ -1,9 +1,8 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { SettingsData } from './utils/SettingsManager';
 
 interface ContainerProps {
   settings: SettingsData;
-  isWindows?: boolean;
 }
 
 export const Container = styled.div<ContainerProps>`
@@ -12,14 +11,6 @@ export const Container = styled.div<ContainerProps>`
   top: 0;
   left: 0;
   right: 0;
-
-  ${(props) =>
-    props.isWindows &&
-    css`
-      margin: 6px;
-      box-shadow: 0 0 5px #161616;
-      border-radius: 5px;
-    `}
 
   display: flex;
   flex-direction: column;
