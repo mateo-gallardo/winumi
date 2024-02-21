@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { PanelResizeHandle } from 'react-resizable-panels';
 
 export const Container = styled.div`
   display: flex;
@@ -77,5 +78,11 @@ export const LineErrorContainer = styled(Result)`
   svg {
     width: 1rem;
     height: 1rem;
+  }
+`;
+
+export const ResizeHandle = styled(PanelResizeHandle)`
+  &[data-resize-handle-state='drag'] {
+    border-left: 1px solid ${(props) => props.theme.colors.editor.separator};
   }
 `;

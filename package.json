@@ -9,9 +9,9 @@
     "prismjs": "^1.28.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-resizable-panels": "^2.0.9",
     "react-scripts": "^5.0.1",
     "react-simple-code-editor": "^0.13.0",
-    "resizable-panels-react": "github:mateo-gallardo/ResizablePanelsReact",
     "styled-components": "^5.3.5"
   },
   "devDependencies": {

@@ -4,8 +4,7 @@ import { ThemeContext } from 'styled-components';
 import Editor from 'react-simple-code-editor';
 import { highlight, languages } from 'prismjs';
 import { create, all, MathJsStatic } from 'mathjs';
-// @ts-ignore
-import ResizablePanels from 'resizable-panels-react';
+import { Panel, PanelGroup } from 'react-resizable-panels';
 import {
   Container,
   EditorContainer,
@@ -14,6 +13,7 @@ import {
   EmptyResult,
   Error,
   LineErrorsContainer,
+  ResizeHandle,
 } from './Lines.styles';
 import { useSharedState } from '../../utils/SharedState';
 import Footer from '../Footer/Footer';
@@ -135,52 +135,50 @@ const Lines = ({ initialLines }: LinesProps) => {
             )}
           </LineErrorsContainer>
         )}
-        <ResizablePanels
-          displayDirection={'row'}
-          width={'100%'}
-          height={'100%'}
-          panelsSize={settings.panelsSizes}
-          sizeUnitMeasure={'%'}
-          resizerColor={theme.colors.primary}
-          resizerSize={'10px'}
-          minPanelSize={15}
-          onResizeEnd={SettingsManager.saveDividerPosition}
+        <PanelGroup
+          direction={'horizontal'}
+          onLayout={SettingsManager.saveDividerPosition}
         >
-          <EditorContainer>
-            <Editor
-              value={lines}
-              onValueChange={(newCode) => {
-                setLines(newCode);
-                evaluateResult(newCode);
-                DataManager.saveLines(newCode);
-              }}
-              highlight={(code) => highlight(code, languages.rego, 'rego')}
-              padding={'0.4em'}
-              style={{
-                color: theme.colors.editor.primary,
-                fontFamily: '"RobotoMono"',
-                fontSize: '1em',
-                flex: 1,
-              }}
-            />
-          </EditorContainer>
-          <ResultsContainer>
-            {results.map((result: string, index: number) =>
-              result ? (
-                <Result
-                  key={`${result}-${index}`}
-                  onClick={() => copyToClipboard(result)}
-                  onMouseEnter={showClickToCopyMessage}
-                  onMouseLeave={hideClickToCopyMessage}
-                >
-                  {result}
-                </Result>
-              ) : (
-                <EmptyResult key={`${result}-${index}`}>none</EmptyResult>
-              )
-            )}
-          </ResultsContainer>
-        </ResizablePanels>
+          <Panel defaultSize={settings.panelsSizes[0]}>
+            <EditorContainer>
+              <Editor
+                value={lines}
+                onValueChange={(newCode) => {
+                  setLines(newCode);
+                  evaluateResult(newCode);
+                  DataManager.saveLines(newCode);
+                }}
+                highlight={(code) => highlight(code, languages.rego, 'rego')}
+                padding={'0.4em'}
+                style={{
+                  color: theme.colors.editor.primary,
+                  fontFamily: '"RobotoMono"',
+                  fontSize: '1em',
+                  flex: 1,
+                }}
+              />
+            </EditorContainer>
+          </Panel>
+          <ResizeHandle />
+          <Panel>
+            <ResultsContainer>
+              {results.map((result: string, index: number) =>
+                result ? (
+                  <Result
+                    key={`${result}-${index}`}
+                    onClick={() => copyToClipboard(result)}
+                    onMouseEnter={showClickToCopyMessage}
+                    onMouseLeave={hideClickToCopyMessage}
+                  >
+                    {result}
+                  </Result>
+                ) : (
+                  <EmptyResult key={`${result}-${index}`}>none</EmptyResult>
+                )
+              )}
+            </ResultsContainer>
+          </Panel>
+        </PanelGroup>
       </Container>
       <Footer />
       {settings.displayErrors && !!errorMessage && (
