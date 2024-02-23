@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { SettingsData } from './utils/SettingsManager';
 
 interface ContainerProps {
-  settings: SettingsData;
+  $settings: SettingsData;
 }
 
 export const Container = styled.div<ContainerProps>`
@@ -17,7 +17,7 @@ export const Container = styled.div<ContainerProps>`
   flex-direction: column;
   text-align: center;
   background-color: ${(props) => props.theme.colors.primary};
-  font-size: ${(props) => props.settings.zoomLevel.fontSize};
+  font-size: ${(props) => props.$settings.zoomLevel.fontSize};
 
   pre {
     // Variables

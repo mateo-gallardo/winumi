@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { Container } from './App.styles';
 import Lines from './components/Lines/Lines';
@@ -28,7 +28,7 @@ const App = () => {
 
   return (
     <ThemeProvider theme={Themes[settings.themeName]}>
-      <Container settings={settings}>
+      <Container $settings={settings}>
         <Lines initialLines={savedData.lines} />
       </Container>
     </ThemeProvider>

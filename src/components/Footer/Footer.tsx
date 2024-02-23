@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { writeText } from '@tauri-apps/api/clipboard';
 import {
   Container,
@@ -31,8 +31,8 @@ const Footer = () => {
     totalResult.current = new TotalResult(setTotal);
 
     return () => {
-      footerMessage.current!.unsubscribe();
-      totalResult.current!.unsubscribe();
+      footerMessage.current?.unsubscribe();
+      totalResult.current?.unsubscribe();
     };
   }, []);
 
@@ -48,7 +48,7 @@ const Footer = () => {
           <SettingsIcon height={'1em'} onClick={() => setShowSettings(true)} />
         </SettingsIconContainer>
         <CenterTextContainer>
-          <Message fade={shouldFadeMessage} hidden={shouldHideMessage}>
+          <Message $fade={shouldFadeMessage} hidden={shouldHideMessage}>
             {message}
           </Message>
           {!!total && (

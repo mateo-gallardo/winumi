@@ -46,15 +46,15 @@ export const Total = styled.div`
 `;
 
 interface MessageProps {
-  fade: boolean;
+  $fade: boolean;
 }
 
-export const Message = styled.div`
+export const Message = styled.div<MessageProps>`
   position: absolute;
   top: 0;
   width: 100%;
   background-color: ${(props) => props.theme.colors.primary};
-  opacity: ${(props: MessageProps) => (props.fade ? 0 : 'initial')};
+  opacity: ${(props: MessageProps) => (props.$fade ? 0 : 'initial')};
   transition-duration: 200ms;
   user-select: none;
   font-size: 0.85em;

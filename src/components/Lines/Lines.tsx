@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { writeText } from '@tauri-apps/api/clipboard';
 import { ThemeContext } from 'styled-components';
 import Editor from 'react-simple-code-editor';
 import { highlight, languages } from 'prismjs';
-import { create, all, MathJsStatic } from 'mathjs';
+import { create, all, MathJsInstance } from 'mathjs';
 import { Panel, PanelGroup } from 'react-resizable-panels';
 import {
   Container,
@@ -23,9 +23,7 @@ import DataManager from '../../utils/DataManager';
 import SettingsManager from '../../utils/SettingsManager';
 import LineError from '../LineError/LineError';
 
-require('prismjs/components/prism-rego');
-
-const math = create(all, { number: 'BigNumber' }) as MathJsStatic;
+const math = create(all, { number: 'BigNumber' }) as MathJsInstance;
 
 interface LinesProps {
   initialLines: string;
@@ -55,9 +53,13 @@ const Lines = ({ initialLines }: LinesProps) => {
           math.evaluate(compoundedExpression);
           correctLines.push(line);
           newLinesWithErrors.push('');
-        } catch (error: any) {
-          newLinesWithErrors.push(error.message);
-          correctLines.push('');
+        } catch (error: unknown) {
+          if (error instanceof window.Error) {
+            newLinesWithErrors.push(error.message);
+            correctLines.push('');
+          } else {
+            console.log('no error?', error);
+          }
         }
       });
 
@@ -119,6 +121,8 @@ const Lines = ({ initialLines }: LinesProps) => {
 
   useEffect(() => {
     evaluateResult(lines);
+    // We only want to evaluate the initial lines once
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -151,7 +155,7 @@ const Lines = ({ initialLines }: LinesProps) => {
                 highlight={(code) => highlight(code, languages.rego, 'rego')}
                 padding={'0.4em'}
                 style={{
-                  color: theme.colors.editor.primary,
+                  color: theme?.colors.editor.primary,
                   fontFamily: '"RobotoMono"',
                   fontSize: '1em',
                   flex: 1,

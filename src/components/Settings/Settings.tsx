@@ -1,4 +1,3 @@
-import React from 'react';
 import { ThemeNames } from '../../constants/Themes';
 import SettingsManager from '../../utils/SettingsManager';
 import { useSharedState } from '../../utils/SharedState';

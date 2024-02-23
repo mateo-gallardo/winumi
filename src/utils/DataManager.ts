@@ -34,7 +34,7 @@ export default class DataManager {
       const path = await DataManager.getFilePath();
       const value = await readTextFile(path);
       DataManager.savedData = JSON.parse(value);
-    } catch (error) {
+    } catch (error: unknown) {
       console.error(error);
     } finally {
       if (!DataManager.savedData) {
@@ -84,12 +84,12 @@ export default class DataManager {
   private static async createSaveDirectory(dir: string): Promise<void> {
     try {
       await readDir(dir);
-    } catch (error) {
+    } catch (error: unknown) {
       try {
         await createDir(dir, {
           recursive: true,
         });
-      } catch (createDirError) {
+      } catch (createDirError: unknown) {
         console.error(createDirError);
       }
     }

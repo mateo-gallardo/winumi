@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import App from './App';
 import SettingsManager from './utils/SettingsManager';
 
